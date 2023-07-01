@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    
+    // 1. 예제
+    function calculate (num1, num2, opreator) {
+      if (opreator == "+") {
+        return num1 + num2; 
+      } else if (opreator == "-") {
+        return num1 - num2; 
+      } else if (opreator == "*") {
+        return num1 * num2; 
+      } else if (opreator == "/") {
+        return num1 / num2; 
+      } else {
+        return "사칙연산자를 입력해주세요.";
+      }
+    }
+
+    var result = calculate(10, 5, "^");
+    console.log(result);
+
+    // 2. 예제
+    function countCharOccurrences(str, char) {
+      var count = 0;
+      for(var i = 0; i < str.length; i++) {
+        if (str[i] == char) {
+          count += 1;
+        }
+      }
+      return count;
+    }
+
+
+    var myChar = "Hello, World!";
+    var charCount = countCharOccurrences(myChar, 'o');
+    console.log(charCount);
+
+    // 2-1. 예제(여러 문자열 비교방법)
+    function countCharOccurrences(str, char) {
+      var count = 0;
+      for(var i = 0; i < str.length; i++) {
+        if (str[i] == char[0]) {
+          for (var j = 1; j < str.length; j++) {
+
+          }
+        }
+      }
+      return count;
+    }
+
+
+    var myChar = "Hello, World!";
+    var charCount = countCharOccurrences(myChar, 'o');
+    console.log(charCount);
+
+    console.log(null == '');
+
+    // 3. 예제
+    var myId = "koreaIT";
+    var myPw = "1234";
+
+    var inputId;
+    var inputPw;
+    
+    function loginValid() {
+      inputId = prompt("아이디를 입력해주세요.");
+      
+      if (inputId.length === 0) {
+        return alert("아이디를 입력해주세요.");
+      }
+      
+      inputPw = prompt("비밀번호를 입력해주세요.");
+
+      if (inputPw.length === 0) {
+        return alert("비밀번호를 입력해주세요.");
+      } else if (inputId === myId && inputPw === myPw) {
+        return alert("로그인 성공입니다.");
+      } else {
+        return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+      } 
+    }
+
+    loginValid();
+    
+    // 4. 예제
+    <div>
+        <input type="text" id="inputId" placeholder="아이디를 입력해주세요." onkeydown="onKeyDown(event)">
+        <br>
+        <input type="password" id="inputPw" placeholder="비밀번호를 입력해주세요." onkeydown="onKeyDown(event)">
+        <br>
+        <button onclick="loginValid(inputId.value, inputPw.value)">로그인</button>
+    </div>  
+    <script>
+
+      var myId = "koreaIT";
+      var myPw = "1234";
+
+      var pwFailCnt = 0;
+
+      function onKeyDown(e){
+        var id = document.getElementById("inputId").value;
+        var pw = document.getElementById("inputPw").value;
+        if (e.keyCode == 13){
+          loginValid(id, pw);
+        }
+      }
+
+      function loginValid(id, pw) {
+
+        if (pwFailCnt >= 5) {
+          return alert("로그인을 5회 실패하여 로그인이 불가합니다.")
+        }
+
+        id = id.trim();
+
+        if (id.length === 0) {
+          return alert("아이디를 입력해주세요.");
+        }
+        
+        pw = pw.trim();
+
+        if (pw.length === 0) {
+          return alert("비밀번호를 입력해주세요.");
+        } 
+
+        if (id !== myId || pw !== myPw) {
+          pwFailCnt++;
+          return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+        }
+
+        return alert("로그인을 성공했습니다.");
+      }
+
+    </script>
+
+</body>
+
+</html>
