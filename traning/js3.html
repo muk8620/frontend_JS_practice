@@ -12,6 +12,8 @@
   <script>
     
     // 1. 예제
+    // 1. 예제
+    // 1. 예제
     function calculate (num1, num2, opreator) {
       if (opreator == "+") {
         return num1 + num2; 
@@ -29,6 +31,8 @@
     var result = calculate(10, 5, "^");
     console.log(result);
 
+    // 2. 예제
+    // 2. 예제
     // 2. 예제
     function countCharOccurrences(str, char) {
       var count = 0;
@@ -63,8 +67,8 @@
     var charCount = countCharOccurrences(myChar, 'o');
     console.log(charCount);
 
-    console.log(null == '');
-
+    // 3. 예제
+    // 3. 예제
     // 3. 예제
     var myId = "koreaIT";
     var myPw = "1234";
@@ -93,54 +97,61 @@
     loginValid();
     
     // 4. 예제
+    // 4. 예제
+    // 4. 예제
     <div>
-        <input type="text" id="inputId" placeholder="아이디를 입력해주세요." onkeydown="onKeyDown(event)">
-        <br>
-        <input type="password" id="inputPw" placeholder="비밀번호를 입력해주세요." onkeydown="onKeyDown(event)">
-        <br>
-        <button onclick="loginValid(inputId.value, inputPw.value)">로그인</button>
+      <input type="text" id="inputId" placeholder="아이디를 입력해주세요." onkeyup="onkeyUp(event)">
+      <br>
+      <input type="password" id="inputPw" placeholder="비밀번호를 입력해주세요." onkeyup="onkeyUp(event)">
+      <br>
+      <button onclick="loginValid(inputId.value, inputPw.value)">로그인</button>
     </div>  
     <script>
 
-      var myId = "koreaIT";
-      var myPw = "1234";
+      var myId = "koreaIT@gmail.com";
+      var myPw = "123412341";
 
       var pwFailCnt = 0;
 
-      function onKeyDown(e){
+      function onkeyUp(e){
         var id = document.getElementById("inputId").value;
         var pw = document.getElementById("inputPw").value;
+
         if (e.keyCode == 13){
           loginValid(id, pw);
         }
       }
 
       function loginValid(id, pw) {
-
+        
         if (pwFailCnt >= 5) {
-          return alert("로그인을 5회 실패하여 로그인이 불가합니다.")
+          return alert("제한된 사용자 입니다!");
         }
-
+        
         id = id.trim();
-
+        let regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        
         if (id.length === 0) {
-          return alert("아이디를 입력해주세요.");
-        }
+          return alert("아이디를 입력해주세요!"); 
+        } else if (!regex.test(id)) {
+          return alert("이메일 형식으로 입력해야 합니다!");
+        } 
         
         pw = pw.trim();
 
         if (pw.length === 0) {
-          return alert("비밀번호를 입력해주세요.");
+          return alert("비밀번호를 입력해주세요!"); 
+        } else if (pw.length < 8 || pw.length > 15) {
+          return alert("비밀번호는 8~15자리까지 입니다!"); 
         } 
 
         if (id !== myId || pw !== myPw) {
           pwFailCnt++;
-          return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+          return alert(`비밀번호를 틀렸습니다. 남은 시도 횟수(${pwFailCnt}/5)`); 
         }
 
         return alert("로그인을 성공했습니다.");
       }
-
     </script>
 
 </body>

@@ -13,9 +13,9 @@
 
 <body>
   <div>
-    <input type="text" class="input input-bordered input-primary w-full max-w-xs" id="inputId" placeholder="아이디를 입력해주세요." onKeyUp="onKeyDown(event)">
+    <input type="text" class="input input-bordered input-primary w-full max-w-xs" id="inputId" placeholder="아이디를 입력해주세요." onkeyup="onkeyUp(event)">
     <br>
-    <input type="password" class="input input-bordered input-primary w-full max-w-xs" id="inputPw" placeholder="비밀번호를 입력해주세요." onKeyUp="onKeyDown(event)">
+    <input type="password" class="input input-bordered input-primary w-full max-w-xs" id="inputPw" placeholder="비밀번호를 입력해주세요." onkeyup="onkeyUp(event)">
     <br>
     <button class="btn btn-neutral" onclick="loginValid(inputId.value, inputPw.value)">로그인</button>
   </div>  
@@ -26,7 +26,7 @@
 
     var pwFailCnt = 0;
 
-    function onKeyDown(e){
+    function onkeyUp(e){
       var id = document.getElementById("inputId").value;
       var pw = document.getElementById("inputPw").value;
 
@@ -128,7 +128,6 @@
           no-repeat
         `
         })
-        return alert();
       }
 
       return Swal.fire({
@@ -146,8 +145,6 @@
       })
     }
   </script>
-
-
 
 </body>
 
