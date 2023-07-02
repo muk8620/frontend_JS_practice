@@ -7,10 +7,217 @@
   <title>Document</title>
 </head>
 <body>
+  <!-- 예제1 -->
+  <script>
+    setTimeout(function(){
+      console.log("5초 뒤에 실행");
+    }, 5000);
+
+    setInterval(function(){
+      console.log("1초에 한번씩 실행");
+    }, 1000);
+
+  </script>  
+
+  <!-- 예제2 -->
   <script>
 
+    // 배열은 []
+    // 함수는 ()
+    // 객체는 {} -> key(property라고도 함) : value
+
+    var array = [];
+
+    var student = {
+      name : '세진'
+      , age : 25
+      , address : '대전'
+      , printInfo : function() {
+        console.log("이름 :" + this.name);
+        console.log("나이 :" + this.age);
+        console.log("주소 :" + this.address);
+      }
+
+      , increaseAge: function(){
+        this.age++;
+        console.log("나이가 1 증가했습니다. 현재 나이 : " + this.age);
+      }
+    };
+    student.printInfo();
+    console.log(console);
+    
+    student.name = '소밍';
+    console.log(student["name"]);
+    console.log(student.address);
+    
+    student.gender = "여";
+    console.log(student);
+    
+    delete student.address;
+    console.log(student);
+
+    student.increaseAge();
+    student.increaseAge();
+    console.log(student);
+  </script>
+
+  <!-- 예제3 -->
+  <script>
+
+    // 배열은 []
+    // 함수는 ()
+    // 객체는 {} -> key(property라고도 함) : value
+
+    var students = [];
+    students.push(
+      "소민"
+      , "세진"
+      , "호윤"
+      , "성훈"
+      , "지호"
+    );
+
+    var student = {
+      name : '소민'
+      , age : 100
+      , address : '대전'
+      , printInfo : function() {
+        console.log("이름 :" + this.name);
+        console.log("나이 :" + this.age);
+        console.log("주소 :" + this.address);
+      }
+
+      , increaseAge: function(){
+        this.age++;
+        console.log("나이가 1 증가했습니다. 현재 나이 : " + this.age);
+      }
+    };
+
+    students[0] = student;
+
+    console.log(students);
+    
+    console.log(typeof students);
+    console.log(typeof student);
 
   </script>
+
+  <!-- 예제4 -->
+  <script>
+    var myObject = {
+      name: "John",
+      age: 25,
+      city: "New York",
+      occupation: "Enginner",
+      hobby: "Gardening",
+      language: "JavaScript",
+      favoriteColor: "Blue",
+      pet: "Dog",
+      car: "Tesla",
+      music: "Rock",
+    };
+
+    // for in은 객체의 프로퍼티를 열거할 때 사용
+    for (var key in myObject){
+      console.log(key); //
+      console.log(myObject['name']);
+      console.log(myObject[key]);
+      console.log(myObject.key); // 안됨
+    }
+
+  </script>
+
+  <!-- 예제5 -->
+  <body>
+
+    <button type="button" onclick="addStudent()">학생추가</button>
+    <script>
+      var students = [
+        {name: "소민", age: 100, address: '제주도'}
+      ]
   
+      function addStudent() {
+        var inputName = prompt("이름을 입력해주세요.");
+        var inputAge = prompt("나이를 입력해주세요.");
+        var inputAddress = prompt("주소를 입력해주세요.");
+        var student = {
+          name : inputName,
+          age : inputAge,
+          address : inputAddress,
+        }
+        students.push(student);
+        console.log(students);
+      }
+    </script>
+  
+  </body>
+
+  <!-- 예제6 -->
+  <body>
+
+    <button type="button" onclick="addStudent()">학생추가</button>
+    <button type="button" onclick="delStudent()">학생삭제</button>
+    <button type="button" onclick="modStudent()">학생수정</button>
+    <button type="button" onclick="printStudents()">학생 목록 출력</button>
+    <script>
+      var students = [
+        {name: "소민", age: 100, address: '제주도'}
+      ]
+  
+      function checkIndex(index) {
+        if (index > students.length - 1) {
+          return false;
+        }
+        return true;
+      }
+  
+      function inputStudent() {
+        var student = {}
+        student.Name = prompt("이름을 입력해주세요.");
+        student.Age = prompt("나이를 입력해주세요.");
+        student.Address = prompt("주소를 입력해주세요.");
+        return student;
+      }
+  
+      function addStudent() {
+        students.push(inputStudent());
+        console.log(students);
+      }
+  
+      function delStudent() {
+        delIndex = Number(prompt("삭제 할 학생 인덱스를 입력해주세요."));
+        
+        if (!checkIndex(delIndex)) {
+          return alert("존재하지 않는 인덱스입니다.");
+        }
+  
+        if (confirm(delIndex + "번 게시물을 삭제하시겠습니까?") == false) {
+          return alert("취소되었습니다.");
+        }
+  
+        students.splice(delIndex, 1);
+      }
+  
+      function modStudent() {
+        modIndex = Number(prompt("수정 할 학생 인덱스를 입력해주세요."));
+  
+        if (!checkIndex(modIndex)) {
+          return alert("존재하지 않는 인덱스입니다.");
+        }
+  
+        students[modIndex] = inputStudent(); 
+      }
+      
+      function printStudents() {
+        for (var student of students) {
+          for (var key in student) {
+            console.log(student[key]);
+          }
+          console.log("--------");
+        }
+      }
+    </script>
+  
+  </body>
 </body>
 </html>

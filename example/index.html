@@ -6,148 +6,72 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.7/dist/full.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-  <div>
-    <input type="text" class="input input-bordered input-primary w-full max-w-xs" id="inputId" placeholder="아이디를 입력해주세요." onKeyUp="onKeyDown(event)">
-    <br>
-    <input type="password" class="input input-bordered input-primary w-full max-w-xs" id="inputPw" placeholder="비밀번호를 입력해주세요." onKeyUp="onKeyDown(event)">
-    <br>
-    <button class="btn btn-neutral" onclick="loginValid(inputId.value, inputPw.value)">로그인</button>
-  </div>  
+
+  <button type="button" onclick="addStudent()">학생추가</button>
+  <button type="button" onclick="delStudent()">학생삭제</button>
+  <button type="button" onclick="modStudent()">학생수정</button>
+  <button type="button" onclick="printStudents()">학생 목록 출력</button>
   <script>
+    var students = [
+      {name: "소민", age: 100, address: '제주도'}
+    ]
 
-    var myId = "koreaIT@gmail.com";
-    var myPw = "123412341";
-
-    var pwFailCnt = 0;
-
-    function onKeyDown(e){
-      var id = document.getElementById("inputId").value;
-      var pw = document.getElementById("inputPw").value;
-
-      if (e.keyCode == 13){
-        loginValid(id, pw);
+    function checkIndex(index) {
+      if (index > students.length - 1) {
+        return false;
       }
+      return true;
     }
 
-    function loginValid(id, pw) {
-      
-      if (pwFailCnt >= 5) {
-        return Swal.fire({
-          title: '제한된 사용자 입니다!',
-          icon: 'error',
-          width: 600,
-          padding: '3em',
-          color: '#b5423e',
-          backdrop: `
-          rgba(181, 66, 62, 0.4)
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          `
-        })
-      }
-      
-      id = id.trim();
-      let regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-      
-      if (id.length === 0) {
-        return Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: '아이디를 입력해주세요.!',
-          footer: '<a href="">Why do I have this issue?</a>',
-          backdrop: `
-          rgba(181, 66, 62, 0.4)
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          no-repeat
-        `
-        })
-      } else if (!regex.test(id)) {
-        return Swal.fire({
-        title: '이메일 형식으로 입력해야 합니다!',
-        icon: 'error',
-        width: 600,
-        padding: '3em',
-        color: '#b5423e',
-        backdrop: `
-          rgba(181, 66, 62, 0.4)
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          no-repeat
-        `
-        })
-      } 
-      
-      pw = pw.trim();
+    function inputStudent() {
+      var student = {}
+      student.Name = prompt("이름을 입력해주세요.");
+      student.Age = prompt("나이를 입력해주세요.");
+      student.Address = prompt("주소를 입력해주세요.");
+      return student;
+    }
 
-      if (pw.length === 0) {
-        return Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: '비밀번호를 입력해주세요.!',
-          footer: '<a href="">Why do I have this issue?</a>',
-          backdrop: `
-          rgba(181, 66, 62, 0.4)
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          no-repeat
-        `
-        })
-      } else if (pw.length < 8 || pw.length > 15) {
-        return Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: '비밀번호는 8~15자리까지 입니다.!',
-          footer: '<a href="">Why do I have this issue?</a>',
-          backdrop: `
-          rgba(181, 66, 62, 0.4)
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          no-repeat
-        `
-        })
-      } 
+    function addStudent() {
+      students.push(inputStudent());
+      console.log(students);
+    }
 
-      if (id !== myId || pw !== myPw) {
-        pwFailCnt++;
-        return Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: `비밀번호를 틀렸습니다. 남은 시도 횟수(${pwFailCnt}/5)`,
-          footer: '<a href="">Why do I have this issue?</a>',
-          backdrop: `
-          rgba(181, 66, 62, 0.4)
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          no-repeat
-        `
-        })
-        return alert();
+    function delStudent() {
+      delIndex = Number(prompt("삭제 할 학생 인덱스를 입력해주세요."));
+      
+      if (!checkIndex(delIndex)) {
+        return alert("존재하지 않는 인덱스입니다.");
       }
 
-      return Swal.fire({
-        title: '로그인을 성공했습니다.',
-        icon: 'success',
-        width: 600,
-        padding: '3em',
-        color: '#716add',
-        backdrop: `
-          rgba(0,0,123,0.4)
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          no-repeat
-        `
-      })
+      if (confirm(delIndex + "번 게시물을 삭제하시겠습니까?") == false) {
+        return alert("취소되었습니다.");
+      }
+
+      students.splice(delIndex, 1);
+    }
+
+    function modStudent() {
+      modIndex = Number(prompt("수정 할 학생 인덱스를 입력해주세요."));
+
+      if (!checkIndex(modIndex)) {
+        return alert("존재하지 않는 인덱스입니다.");
+      }
+
+      students[modIndex] = inputStudent(); 
+    }
+    
+    function printStudents() {
+      for (var student of students) {
+        for (var key in student) {
+          console.log(student[key]);
+        }
+        console.log("--------");
+      }
     }
   </script>
-
-
 
 </body>
 
