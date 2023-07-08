@@ -8,25 +8,185 @@
 </head>
 <body>
   <!-- 예제1 -->
+  <script>
+    // 랜덤
+    var randomNum = Math.random();
+    console.log(randomNum);
 
+    // 반올림
+    var randomNum1 = Math.round(4.7);
+    
+    // 올림
+    var randomNum2 = Math.ceil(4.7);
 
-  <!-- 예제2 -->
+    // 내림
+    var randomNum3 = Math.floor(4.7);
 
+    // 최댓값
+    var randomNum4 = Math.max(4.7);
 
-  <!-- 예제3 -->
-  
+    // 최솟값
+    var randomNum5 = Math.min(4.7);
+  </script>
 
-  <!-- 예제4 -->
-
-
-  <!-- 예제5 -->
-
-
-  <!-- 예제6 -->
+  <!-- 예제2 로또 복권 추첨기 첫 풀이 -->
   <script>
     
+    function randomNumberMake() {
+      var randomNumbers = [];
+      while(true) {
+        var randomNumber = Math.ceil(Math.random() * 10);
+        var isDupCheck = false;
+        for (var number of randomNumbers) { 
+          if (number === randomNumber) {
+            isDupCheck = true;
+            continue;
+          }
+        }
+        if (!isDupCheck) {
+          randomNumbers.push(randomNumber);
+        }
 
+        if (randomNumbers.length === 6) {
+          break;
+        }
+      }
+
+      randomNumbers.sort(function(a, b){
+        return a - b;
+      });
+
+      return randomNumbers;
+    }
+
+    number = randomNumberMake();
+
+    console.log(number);
+  </script>
+
+  <!-- 예제2-1 로또 복권 추첨기 정답-->
+  <script>
+    function generateLottoNumbers() {
+      var randomNumbers = [];
+
+      while(randomNumbers.length < 6) {
+        var randomNumber = Math.ceil(Math.random() * 45);
+
+        if (randomNumbers.indexOf(randomNumber) === -1) {
+          randomNumbers.push(randomNumber);
+        }
+      }
+
+      randomNumbers.sort(function(a, b){
+        return a - b;
+      });
+
+      return randomNumbers;
+    }
+
+    lottoNumbers = generateLottoNumbers();
+
+    console.log(lottoNumbers);
+  </script>
+
+  <!-- 예제3 -->
+  <h1 id="curTime"></h1>
+
+  <script>
+    var today = new Date();
+    console.log(today);
+    console.log(today.getFullYear());
+    console.log(today.getMonth() + 1);
+    console.log(today.getDate());
+
+    function getTodayDate() {
+      var today = new Date();
+      var year =  today.getFullYear()
+      var month = today.getMonth() + 1 < 10 ? "0" + (today.getMonth()+1) : (today.getMonth()+1);
+      var date = today.getDate() < 10 ? "0" + (today.getDate()) : (today.getDate());
+      var hour = today.getHours() < 10 ? "0" + (today.getHours()) : (today.getHours());
+      var min = today.getMinutes() < 10 ? "0" + (today.getMinutes()) : (today.getMinutes());
+      var sec = today.getSeconds() < 10 ? "0" + (today.getSeconds()) : (today.getSeconds());
+
+      today = `${year}-${month}-${date} ${hour}:${min}:${sec}`;
+      return today;
+    }
+
+    setInterval(function() {
+      var curTime = document.getElementById('curTime');
+      curTime.innerHTML = `<select >
+    <option>${getTodayDate()}</option>
+  </select>` ;
+    }, 1000)
+    
+  </script>
+
+  <!-- 예제4 -->
+  <span class="curTime">현재시간</span>
+  <span class="curTime"></span>
+  <span class="curTime">입니다.</span>
+  
+
+  <script>
+    var today = new Date();
+    console.log(today);
+    console.log(today.getFullYear());
+    console.log(today.getMonth() + 1);
+    console.log(today.getDate());
+
+    function getTodayDate() {
+      var today = new Date();
+      var year =  today.getFullYear()
+      var month = today.getMonth() + 1 < 10 ? "0" + (today.getMonth()+1) : (today.getMonth()+1);
+      var date = today.getDate() < 10 ? "0" + (today.getDate()) : (today.getDate());
+      var hour = today.getHours() < 10 ? "0" + (today.getHours()) : (today.getHours());
+      var min = today.getMinutes() < 10 ? "0" + (today.getMinutes()) : (today.getMinutes());
+      var sec = today.getSeconds() < 10 ? "0" + (today.getSeconds()) : (today.getSeconds());
+
+      today = `${year}-${month}-${date} ${hour}:${min}:${sec}`;
+      return today;
+    }
+
+    function timer() {
+      var curTime = document.querySelectorAll('span');
+      curTime[1].innerHTML = `${getTodayDate()} <button onclick="stop()">중지</button>`;
+    }
+    
+    function stop() {
+      clearInterval(time);
+      return alert("중지되었습니다.");
+    }
+
+    let time = setInterval(timer, 1000);
+  </script>
+
+  <!-- 예제5 -->
+  <div class="curTime">현재시간</div>
+  <div class="curTime"></div>
+  <div class="curTime">입니다.</div>
+
+  <script>
+    var div = document.getElementsByClassName("curTime");
+    
+    div[0].style.color = "red";
+    console.log(div[0]);
+
+    div[2].style.color = "white";
+    div[2].style.backgroundColor = `black`;
   </script>
   
+  <!-- 예제6 -->
+  <div class="curTime">현재시간</div>
+  <div class="curTime"></div>
+  <div class="curTime">입니다.</div>
+
+  <script>
+    var h1 = document.createElement("h1");
+    h1.innerText = "안녕";
+
+    var div = document.getElementsByClassName("curTime");
+    div[0].appendChild(h1);
+    console.log(document.body);
+  </script>
 </body>
 </html>
