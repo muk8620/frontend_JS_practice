@@ -8,19 +8,115 @@
 </head>
 <body>
   <!-- 예제1 -->
-
+  <script>
+    function sumAll() {
+      var sum = 0;
+      for (var i of arguments) {
+        if (typeof i !== "number") {
+          continue;
+        }
+        sum += i;
+      }
+      return sum;
+    }
+    console.log(sumAll(1,2,'d',4,5,6,7,8,9));
+  </script>
 
   <!-- 예제2 -->
+  <script>
+    var input = document.createElement("input");
+    input.value = "king2992";
+    // input.disabled = true;
+    // input.readOnly = true;
+    input.setAttribute("data-id", "myId");
+    input.setAttribute("maxlength", 5);
+    document.body.appendChild(input);
+    
+    console.log(input.getAttribute("maxlength"));
+    
+    localStorage.setItem("myId", "king2992");
+    sessionStorage.setItem("myPw", 1234);
 
+    console.log(localStorage.getItem("myId"));
+    console.log(sessionStorage.getItem("myPw"));
+
+  </script>
 
   <!-- 예제3 -->
-  
+  <h1>nextSibling 예제</h1>
+
+  <p>첫 번째 문단</p>
+  <p id="target">두 번째 문단 (대상)</p>
+  <p>세 번째 문단</p>
+
+  <script>
+    function getSibling() {
+      var element = document.getElementById("target");
+      console.log(element);
+
+      var netxSibling = element.nextElementSibling;
+      console.log(netxSibling.textContent);
+      
+      var preSibling = element.previousElementSibling;
+      console.log(preSibling.textContent);
+    }
+
+    getSibling();
+
+  </script>
 
   <!-- 예제4 -->
+  <script>
+    var element = document.getElementById("target");
+    console.log(element.parentElement);
+    
+    var parent = document.getElementById("parent");
+    var firstChild = parent.firstElementChild;
+    var lastChild = parent.lastElementChild;
+    var children1 = parent.childNodes;
+    var children2 = parent.children;
 
+    children2[1].style.color = "red";
+
+    console.log(firstChild.textContent);
+    console.log(lastChild.textContent);
+    console.log(children1);
+    console.log(children2);
+
+  </script>
 
   <!-- 예제5 -->
+  <div id="parent">
+    <p>첫 번째 문단<button  onclick="remove()">삭제</button></p>
+    <p id="target">두 번째 문단 (대상)<button  onclick="remove()">삭제</button></p>
+    <p>세 번째 문단<button  onclick="remove()">삭제</button></p>
+    
+  </div>
+  
+  <script>
+    var element = document.getElementById("target");
+    console.log(element.parentElement);
+    
+    var parent = document.getElementById("parent");
+    var firstChild = parent.firstElementChild;
+    var lastChild = parent.lastElementChild;
+    var children1 = parent.childNodes;
+    var children2 = parent.children;
 
+    children2[1].style.color = "red";
+
+    console.log(firstChild.textContent);
+    console.log(lastChild.textContent);
+    console.log(children1);
+    console.log(children2);
+
+    function remove() {
+      console.log(event.target.parentNode);
+      console.log(event.target.parentElement);
+      event.target.parentNode.remove();
+    }
+
+  </script>
 
   <!-- 예제6 -->
   <script>

@@ -7,9 +7,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+
+  h4 {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  #todoInput {
+    padding: 8px;
+    width: 250px;
+  }
+
+  #addButton {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  #todoList {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+    padding: 8px;
+    background-color: #afafaf;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  li span {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+
+  li button {
+    padding: 4px 8px;
+    margin-left: 5px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+</style>
+
 <body>
-  
- 
+  <h1>할 일 목록</h1>  
+  <h4></h4>
+
+  <div class="input-container">
+    <input type="text" id="todoInput" placeholder="할 일을 입력하세요." onkeyup="onkeyUp(event)">
+    <button id="addButton" onclick="addButton()" >추가</button>
+  </div>
+
+  <ul id="todoList"></ul>
+
+  <script>
+
+    // 할일 추가 수정 삭제
+    function onkeyUp(e){
+      if (e.keyCode == 13){
+        addButton();
+      }
+    }
+
+    function addButton() {
+      var input = document.getElementById('todoInput');
+
+      if (input.value.trim() === '') {
+        return alert("할 일을 입력하세요.");
+      }
+
+      var ul = document.getElementById('todoList');
+
+      var div = document.createElement("div");
+      div.setAttribute('class', 'alarm');
+
+      div.innerHTML = `<input type="date" name="date">
+  <input type="time" name="time">`;
+
+      var li = document.createElement("li");
+      li.innerHTML = `<span>${input.value}</span><button onclick="modify()">수정</button><button onclick="remove()">삭제</button>`;
+      
+      ul.appendChild(div);
+      ul.appendChild(li);
+      input.value = null;
+    }
+
+    function modify() {
+      var span = event.target.previousElementSibling;
+      var modifyText = prompt('수정 할 내용을 입력하세요.');
+
+      if (modifyText.trim() === '') {
+        return alert("내용을 입력하세요.");
+      }
+
+      span.innerText = modifyText;
+    }
+    
+    function remove() {
+      event.target.parentNode.previousElementSibling.remove();
+      event.target.parentNode.remove();
+    }
+
+    // 시간 표시
+    function getTodayDate() {
+      var today = new Date();
+      var year =  today.getFullYear()
+      var month = today.getMonth() + 1 < 10 ? "0" + (today.getMonth()+1) : (today.getMonth()+1);
+      var date = today.getDate() < 10 ? "0" + (today.getDate()) : (today.getDate());
+      var hour = today.getHours() < 10 ? "0" + (today.getHours()) : (today.getHours());
+      var min = today.getMinutes() < 10 ? "0" + (today.getMinutes()) : (today.getMinutes());
+      var sec = today.getSeconds() < 10 ? "0" + (today.getSeconds()) : (today.getSeconds());
+
+      today = `${year}-${month}-${date} ${hour}:${min}:${sec}`;
+      return today;
+    }
+    var curTime = document.getElementsByTagName("h4");
+    
+    setInterval(function() {
+      curTime[0].innerHTML = `${getTodayDate()}`;
+
+      var setAlarm = document.getElementsByClassName('alarm');
+
+      for (var i of setAlarm) {
+        var time = `${i.firstElementChild.value} ${i.lastElementChild.value}:00`;
+        if (time === getTodayDate()) {
+          alert("설정한 시간이 되었습니다.");
+        }
+      }
+      
+    }, 1000)
+
+    
+  </script>
 
 </body>
 
