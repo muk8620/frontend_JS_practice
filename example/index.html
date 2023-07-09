@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <style>
@@ -104,8 +105,8 @@
       var div = document.createElement("div");
       div.setAttribute('class', 'alarm');
 
-      div.innerHTML = `<input type="date" name="date">
-  <input type="time" name="time">`;
+      div.innerHTML = `<input type="date">
+  <input type="time">`;
 
       var li = document.createElement("li");
       li.innerHTML = `<span>${input.value}</span><button onclick="modify()">수정</button><button onclick="remove()">삭제</button>`;
@@ -154,13 +155,23 @@
       for (var i of setAlarm) {
         var time = `${i.firstElementChild.value} ${i.lastElementChild.value}:00`;
         if (time === getTodayDate()) {
-          alert("설정한 시간이 되었습니다.");
+          Swal.fire({
+            title: `${i.nextElementSibling.firstElementChild.textContent}`,
+            icon: 'success',
+            width: 600,
+            padding: '3em',
+            color: '#716add',
+            backdrop: `
+              rgba(0,0,123,0.4)
+              url("https://sweetalert2.github.io/images/nyan-cat.gif")
+              left top
+              no-repeat
+            `
+          });
         }
       }
       
     }, 1000)
-
-    
   </script>
 
 </body>
