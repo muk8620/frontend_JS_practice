@@ -7,24 +7,120 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- 예제1 -->
+  <!-- 예제1-0 index.html -->
+  <input type="text" >
+  <button onclick="openPopup()">팝업 열기</button>
+  <button onclick="localStorage.removeItem('input')">삭제</button>
+  
+  <script>
+    function openPopup() {
+      
+      localStorage.setItem("input", document.getElementsByTagName('input')[0].value);
+      
+      let popupUrl = "popup.html";
+      let name = "popup test";
+      let option = "width = 500, height = 500, top = 100, left = 200, location = no";
+      window.open(popupUrl, name, option);
+      console.log(document.getElementsByTagName('input')[0]);
+      console.dir(document.getElementsByTagName('input')[0]);
+    }
+    </script>
 
+  <!-- 예제1-1 popup.html -->
+
+  <h1>팝업입니다.</h1>
+  <button onclick="localStorage.clear();">삭제</button>
+  <br>
+  <script>
+    document.write(localStorage.getItem("input"));
+    localStorage.setItem("input2", "dlfksafds");
+    localStorage.setItem("input3", "dlfksafdsfdsafds");
+  </script>
 
   <!-- 예제2 -->
+  <input type="text" id="myInput">
+  <script>
+    var myInput = document.getElementById('myInput');
 
+    myInput.addEventListener("change", function(event) {
+      console.log(event.target.value);
+    })
+  </script>
 
   <!-- 예제3 -->
-  
+  <input type="text" id="myInput">
+  <script>
+    var myInput = document.getElementById('myInput');
+
+    myInput.addEventListener("input", function(event) {
+
+      if (event.target.value.length >= 8) {
+        alert("8자리 이상 입력할 수 없습니다.");
+        event.target.value = '';
+      }
+
+      console.log(event.target.value);
+    })
+
+    </script>
 
   <!-- 예제4 -->
+  <input type="text" id="myInput">
+  <script>
+    var myInput = document.getElementById('myInput');
 
+    document.addEventListener("keydown", function(event) {
+      console.log("keydown - key : ", event.key);
+      console.log("keydown - keyCode : ", event.keyCode);
+      console.log("keydown - code : ", event.code);
+      
+    })
+
+    </script>
 
   <!-- 예제5 -->
+  <div id="myDiv"></div>
+  <script>
+    document.getElementById('myDiv').addEventListener("mousemove", function(event) {
+      console.log("Mouse moved at X:", event.clientX, "Y:", event.clientY);
+    })
 
+  </script>
 
   <!-- 예제6 -->
+  <div style="width: 200px; height: 200px; background-color: red;"></div>
+  <div style="width: 200px; height: 200px; background-color: yellow;"></div>
+  <div style="width: 200px; height: 200px; background-color: green;"></div>
+ 
   <script>
+
+    var divs = document.querySelectorAll('div');
+
+    divs.forEach(function (div, index) {
+      div.addEventListener("mouseover", function(event) {
+        colors = event.target.style.backgroundColor;
+        event.target.style.backgroundColor = "black";
+      })
+      
+      div.addEventListener("mouseout", function(event) {
+        event.target.style.backgroundColor = colors;
+      })
+
+    })
+
+    // foreach활용
+
+    // document.getElementById('myDiv1').addEventListener("mouseover", function(event) {
+    //   console.log(event.target.style.backgroundColor);
+    // })
     
+    // document.getElementById('myDiv2').addEventListener("mouseover", function(event) {
+    //   console.log(event.target.style.backgroundColor);
+    // })
+    
+    // document.getElementById('myDiv3').addEventListener("mouseover", function(event) {
+    //   console.log(event.target.style.backgroundColor);
+    // })
 
   </script>
   
