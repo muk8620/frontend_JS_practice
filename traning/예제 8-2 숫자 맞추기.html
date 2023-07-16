@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 맞추기 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 200px;
+            padding: 5px;
+        }
+
+        .result {
+            margin-top: 10px;
+        }
+
+        .result p {
+            margin: 0;
+        }
+
+        .attempts {
+            margin-top: 20px;
+        }
+
+        .attempts p {
+            margin: 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>숫자 맞추기 게임</h1>
+        <div class="input-group">
+            <label>추측한 숫자:</label>
+            <input type="" id="guess" placeholder="1에서 100 사이의 숫자를 입력하세요">
+        </div>
+        <button onclick="checkGuess()">확인</button>
+        <button onclick="retry()">다시하기</button>
+        <div class="result" id="result"></div>
+        <div class="attempts" id="attempts"></div>
+    </div>
+
+  <script>
+    var oldCountNumber = [];
+    var secretNumber = Math.ceil(Math.random() * 100);
+
+    function retry() {
+      oldCountNumber = [];
+      secretNumber = Math.ceil(Math.random() * 100);
+      result.innerHTML ='';
+      attempts.innerHTML = '';
+      document.querySelector('#guess').value = '';
+      document.querySelector('#guess').disabled = false;
+    }
+    
+    function checkGuess() {
+      
+      var input = document.querySelector('#guess');
+      var inputNumber = Number(document.querySelector('#guess').value);
+      var result = document.querySelector('#result');
+      var attempts = document.querySelector('#attempts');
+      
+      if (inputNumber > 100 || inputNumber < 1) {
+        result.innerHTML = `1부터 100까지의 숫자를 입력해주세요.`;
+        return;
+      }
+
+      if(inputNumber > secretNumber) {
+        oldCountNumber.push(inputNumber);
+        result.innerHTML = `더 작은 숫자를 입력하세요 시도 횟수 : ${oldCountNumber.length}`;
+        attempts.innerHTML = `시도한 숫자 : ${oldCountNumber}`;
+      } else if(inputNumber < secretNumber) {
+        oldCountNumber.push(inputNumber);
+        result.innerHTML = ` 더 큰 숫자를 입력하세요 시도 횟수 : ${oldCountNumber.length}`;
+        attempts.innerHTML = `시도한 숫자 : ${oldCountNumber}`;
+      } else {
+        oldCountNumber.push(inputNumber);
+        result.innerHTML = `축하합니다! 정답입니다 시도 횟수 : ${oldCountNumber.length}`;
+        input.disabled = true;
+        attempts.innerHTML = `시도한 숫자 : ${oldCountNumber}`;
+      }
+    }
+
+  </script>
+</body>
+
+
+</html>

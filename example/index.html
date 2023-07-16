@@ -1,56 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-
 <body>
-  <div class="slider">
-    <img src="저널리스트_썸네일1.png" width="700px" id="slide">
-  </div>
-  <button onclick="changeImage(1)">다음</button>
-  <button onclick="changeImage(-1)">이전</button>
+  <input type="file" id="input">  
+  
   <script>
+    const input = document.querySelector("#input");
 
-    function changeImage(number) {
-      var image = document.querySelector('#slide')
-      var old_src_number = Number(image.getAttribute('src').substr(9, 1));
-
-      var imageNumbers = ['1', '2', '3'];
-
-      if (old_src_number > imageNumbers.length) {
-        old_src_number = 0;
-      } 
-
-      if (old_src_number < imageNumbers.length) {
-        old_src_number = imageNumbers.length;
-      } 
-
-      console.log(old_src_number);
-
-      image.setAttribute('src', `저널리스트_썸네일${old_src_number + number}.png`);
-    }
-
-    // foreach활용
-
-    // document.getElementById('myDiv1').addEventListener("mouseover", function(event) {
-    //   console.log(event.target.style.backgroundColor);
-    // })
-    
-    // document.getElementById('myDiv2').addEventListener("mouseover", function(event) {
-    //   console.log(event.target.style.backgroundColor);
-    // })
-    
-    // document.getElementById('myDiv3').addEventListener("mouseover", function(event) {
-    //   console.log(event.target.style.backgroundColor);
-    // })
-
+    input.addEventListener("change", function(event) {
+      const file = event.target.files[0]; // file 객체
+      const reader = new FileReader(); // fileReader 생성
+      reader.readAsText(file);
+      reader.onload = function (e) {
+      // load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생
+        document.write(e.target.result);
+      }
+    })
   </script>
 </body>
-
-
 </html>

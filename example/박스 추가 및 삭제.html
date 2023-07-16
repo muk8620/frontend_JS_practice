@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>박스 추가 및 삭제</title>
+  <style>
+    .box-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #f2f2f2;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    .box:hover {
+      background-color: #e2e2e2;
+      transform: scale(1.05);
+    }
+
+    .delete-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 20px;
+      height: 20px;
+      background-color: #f2f2f2;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #999;
+      transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    .delete-button:hover {
+      background-color: #e2e2e2;
+      color: #666;
+    }
+
+    .button {
+      padding: 10px 20px;
+      background-color: #03c75a;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .button:hover {
+      background-color: #02ac4a;
+    }
+  </style>
+</head>
+<body>
+  <div class="box-container" id="container">
+    <div style="background-color: red;" class="box">Box 1<button class="delete-button" onclick="deleteButton()">X</button></div>
+  </div>
+  <button class="button" id="addButton" onclick="addButton()">박스 추가</button>
+  <button class="button" id="clearButton" onclick="clearButton()">박스 초기화</button>
+  <script>
+    var boxes = ['box'];
+    var boxContainer = document.querySelector('#container');
+
+    function addButton() {
+      var boxLength = document.getElementsByClassName('box').length + 1; 
+ 
+       if (boxLength > 20) {
+         alert('box는 20개 까지만 만들수 있습니다.');
+         return;
+       }
+ 
+       var inputText = `Box ${boxes.length + 1}`;
+       var box = document.createElement("div");
+       boxes.push(inputText);
+ 
+       box.innerHTML = `${inputText} <button class="delete-button" onclick="deleteButton()">X</button>`;
+       if (boxLength % 3 === 1) {
+         box.style.backgroundColor = 'red';
+       } else if (boxLength % 3 === 2) {
+         box.style.backgroundColor = 'blue';
+       } else {
+         box.style.backgroundColor = 'green';
+       }
+       box.setAttribute('class', 'box');
+       boxContainer.appendChild(box);
+    }
+
+    function deleteButton() {
+      event.target.parentNode.remove();
+    }
+
+    function clearButton() {
+      document.getElementById("container").innerHTML = "";
+    }
+  </script>
+</body>
+</html>

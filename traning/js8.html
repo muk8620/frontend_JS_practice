@@ -8,18 +8,106 @@
 </head>
 <body>
   <!-- 예제1 -->
+  <div class="slider">
+    <img class="slide-in-right" src="저널리스트_썸네일1.png" width="700px" id="slide">
+  </div>
+  <button onclick="changeImage(1)">다음</button>
+  <button onclick="changeImage(-1)">이전</button>
 
+  <script>
+    var imageNumbers = ['저널리스트_썸네일1.png', '저널리스트_썸네일2.png', '저널리스트_썸네일3.png'];
+    var currentImageIndex = 0;
 
-  <!-- 예제2 -->
+    function changeImage(idx) {
+      var image = document.querySelector('#slide');
 
+      
+      currentImageIndex += idx;
 
-  <!-- 예제3 -->
+      if (currentImageIndex > imageNumbers.length - 1) {
+        currentImageIndex = 0;
+      } else if (currentImageIndex < 0) {
+        currentImageIndex = imageNumbers.length - 1;
+      } 
+
+      image.src = imageNumbers[currentImageIndex];
+    }
+
+    setInterval(function() {
+       changeImage(1);
+    }, 3000)
+
+  </script>
+
+  <!-- 예제2-0 -->
+
+  <!-- 예제2-1 -->
+  <input type="file" id="input">  
   
+  <script>
+    const input = document.querySelector("#input");
 
-  <!-- 예제4 -->
+    input.addEventListener("change", function(event) {
+      const file = event.target.files[0]; // file 객체
+      const reader = new FileReader(); // fileReader 생성
+      reader.readAsText(file);
+      reader.onload = function (e) {
+      // load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생
+        document.write(e.target.result);
+      }
+    })
+  </script>
 
+  <!-- 예제3 자바스크립트 구현-->
+  <div class="box-container" id="container">
+    <div style="background-color: red;" class="box">Box 1<button class="delete-button">X</button></div>
+   </div>
+   <button class="button" id="addButton">박스 추가</button>
+   <button class="button" id="clearButton">박스 초기화</button>
+   <script>
+     var boxes = ['box'];
+     var addButton = document.querySelector('#addButton');
+     var boxContainer = document.querySelector('#container');
+ 
+     document.querySelector('#clearButton').addEventListener('click', function(event) {
+       document.getElementById("container").innerHTML = "";
+     })
+ 
+     addButton.addEventListener("click", function(event) {
+ 
+       var boxLength = document.getElementsByClassName('box').length + 1; 
+ 
+       if (boxLength > 20) {
+         alert('box는 20개 까지만 만들수 있습니다.');
+         return;
+       }
+ 
+       var inputText = `box ${boxes.length + 1}`;
+       var box = document.createElement("div");
+       boxes.push(inputText);
+ 
+       box.innerHTML = `${inputText} <button class="delete-button">X</button>`;
+       if (boxLength % 3 === 1) {
+         box.style.backgroundColor = 'red';
+       } else if (boxLength % 3 === 2) {
+         box.style.backgroundColor = 'blue';
+       } else {
+         box.style.backgroundColor = 'green';
+       }
+       box.setAttribute('class', 'box');
+       boxContainer.appendChild(box);
+     })
+ 
+     document.getElementById("container").addEventListener('click', function(event) {
+       var deleteBox = event.target.parentNode;
+ 
+       if (deleteBox.getAttribute('class') === 'box') {
+         deleteBox.remove();
+       }
+     })
+     </script>
 
-  <!-- 예제5 -->
+  <!-- 예제3-1 inline 방식구현 -->
 
 
   <!-- 예제6 -->
