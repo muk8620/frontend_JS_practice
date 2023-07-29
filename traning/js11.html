@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 예제1 -->
+  <script>
+
+    //생성자로 학생 만들기
+    function Student(name, korean, math, english, science){
+
+
+      this.이름 = name;
+      this.국어 = korean;
+      this.수학 = math;
+      this.영어 = english;
+      this.과학 = science;
+
+      this.getSum = function(){
+        return this.국어 + this.수학 + this.영어 + this.과학;
+      };
+
+      this.getAverage = function(){
+        return this.getSum() / 4;
+      };
+    }
+
+    var student = new Student('박세진', 95, 90, 85, 80);
+    console.log(student.getSum());
+    console.log(student.getAverage());
+
+    // 객체로 학생 만들기
+
+    var studentObj = {
+      이름 : '박세진',
+      국어 : 95,
+      수학 : 90,
+      영어 : 85,
+      과학 : 80,
+
+      getSum : function(){
+        return this.국어 + this.수학 + this.영어 + this.과학;
+      },
+
+      getAverage : function(){
+        return this.getSum() / 4;
+      }
+    };
+
+    console.log(studentObj.getSum());
+    console.log(studentObj.getAverage());
+
+  </script>
+
+  <!-- 예제2 -->
+  <script>
+    //생성자함수의 프로토타입 이용
+    function Student(name, korean, math, english, science){
+      this.이름 = name;
+      this.국어 = korean;
+      this.수학 = math;
+      this.영어 = english;
+      this.과학 = science;
+
+    }
+
+    Student.prototype.getSum = function(){
+      return this.국어 + this.수학 + this.영어 + this.과학;
+    };
+
+    Student.prototype.getSum = function(){
+      return this.getSum() / 4;
+    };
+  </script>
+
+  <!-- 예제3 getter,setter -->
+
+  <script>
+    //생성자함수의 프로토타입 이용
+    function Student(name, korean, math, english, science){
+
+      var privateName = name;
+      var privateKorean = korean;
+      var privateMath = math;
+      var privateEnglish = english;
+      var privateScience = science;
+
+      this.getName = function (){
+        return privateName;
+      };
+
+      this.setName = function (newName){
+        privateName = newName;
+      };
+
+      this.toString = function () {
+        return `${privateName}의 점수 - 국어 : ${privateKorean}, 수학 : ${privateMath}, 영어 : ${privateEnglish}, 과학 : ${privateScience} `;
+      };
+
+    }
+
+    Student.prototype.getSum = function(){
+      return this.국어 + this.수학 + this.영어 + this.과학;
+    };
+
+    Student.prototype.getAverage = function(){
+      return this.getSum() / 4;
+    };
+
+    var student = new Student('박세진', 95, 90, 85, 80);
+    student.setName('바?꿈');
+    console.log(student.getName());
+
+  </script>
+
+  <!-- 예제4 복습 -->
+
+  <div id="myDiv">div태그입니다.</div>
+  <script>
+    var myDiv = document.getElementById('myDiv');
+    myDiv.classList.add('red-color');
+    myDiv.setAttribute('class', 'red-color');
+
+    myDiv.classList.remove('red-color');
+    myDiv.removeAttribute('class', 'red-color');
+    
+    var newDiv = document.createElement('div');
+    newDiv.classList.add('red-color');
+    newDiv.innerHTML = '새로운 div';
+
+    document.body.appendChild(newDiv);
+  </script>
+  <!-- 예제5 -->
+  
+</body>
+</html>

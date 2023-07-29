@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .red-color {
+      color: red;
+    }
+  </style>
 </head>
-<body>
-  <input type="file" id="input">  
-  
-  <script>
-    const input = document.querySelector("#input");
 
-    input.addEventListener("change", function(event) {
-      const file = event.target.files[0]; // file 객체
-      const reader = new FileReader(); // fileReader 생성
-      reader.readAsText(file);
-      reader.onload = function (e) {
-      // load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생
-        document.write(e.target.result);
-      }
-    })
+<body>
+  <input type="text" id="myInput">
+  <script>
+    var myInput = document.getElementById('myInput');
+    myInput.value = '인풋';
+    myInput.setAttribute('value', '인풋에 입력된 값');
+    myInput.remove();
   </script>
 </body>
+
 </html>
