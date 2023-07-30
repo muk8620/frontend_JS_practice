@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .red-color {
+      color: red;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="parent">
+    <ul>
+      <li>첫 번째 자식</li>
+      <li>두 번째 자식</li>
+      <li>세 번째 자식</li>
+      <li>
+        네번째 자식
+        <span id="mySpan">(막내)</span>
+      </li>
+    </ul>
+  </div>
+  <script>
+    // var span = document.getElementById('mySpan');
+    
+    // var inputElement = document.createElement('span');
+    // inputElement.setAttribute('id', 'mySpan');
+    // inputElement.innerText = '(첫째)';
+    // var firstChild = span.parentElement.parentElement.firstElementChild;
+    var inputElement = $('<span id="mySpan">(첫째)</span>');
+    
+    // console.log($('#mySpan').parent().css);
+    
+    $('#parent ul li:first-child').append(inputElement);
+    $('#mySpan').parent().parent().children().first().append(inputElement);
+
+  </script>
+
+</body>
+
+</html>

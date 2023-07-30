@@ -6,21 +6,47 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    .red-color {
-      color: red;
-    }
-  </style>
 </head>
 
 <body>
-  <input type="text" id="myInput">
+
+  <div id="myBox" style="position: absolute; top: 50px; left: 50px; width: 50px; height: 50px; background-color: blue;"></div>
   <script>
-    var myInput = document.getElementById('myInput');
-    myInput.value = '인풋';
-    myInput.setAttribute('value', '인풋에 입력된 값');
-    myInput.remove();
+    var step = 5;
+    var myBox = document.querySelector('#myBox');
+    
+    document.addEventListener('keydown', function(event){
+      var topNumber = parseInt(myBox.style.top);
+      var leftNumber = parseInt(myBox.style.left);
+
+      switch (event.key) {
+        case 'ArrowUp':
+          myBox.style.top = (topNumber - step) + 'px';
+          break;
+        case 'ArrowDown':
+          myBox.style.top = (topNumber + step) + 'px';
+          break;
+        case 'ArrowRight':
+          myBox.style.left = (leftNumber + step) + 'px';
+          break;
+        case 'ArrowLeft':
+          myBox.style.left = (leftNumber - step) + 'px';
+          break;
+      }
+    })
+
+    myBox.addEventListener('mousedown', function(event) {
+      document.addEventListener('mousemove', function(event) {
+        myBox.style.left = event.clientX + 'px';
+        myBox.style.top = event.clientY + 'px';
+      })
+
+      document.addEventListener('mouseup', function(event) {
+      })
+    })
+    
   </script>
+
 </body>
 
 </html>
