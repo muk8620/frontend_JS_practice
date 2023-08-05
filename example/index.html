@@ -35,15 +35,22 @@
       }
     })
 
-    myBox.addEventListener('mousedown', function(event) {
-      document.addEventListener('mousemove', function(event) {
-        myBox.style.left = event.clientX + 'px';
-        myBox.style.top = event.clientY + 'px';
-      })
+    let isMouseDown = false;
 
-      document.addEventListener('mouseup', function(event) {
-      })
-    })
+    myBox.addEventListener('mousedown', function(event) {
+      isMouseDown = true;
+      document.addEventListener('mousemove', function(event) {
+        if (isMouseDown) {
+          myBox.style.left = event.clientX + 'px';
+          myBox.style.top = event.clientY + 'px';
+          myBox.style.transform = 'translate(-50%, -50%)';
+        }
+      });
+    });
+
+    document.addEventListener('mouseup', function(event) {
+      isMouseDown = false;
+    });
     
   </script>
 
